@@ -1,5 +1,4 @@
 "use client"
-
 import { Description } from 'app/components/home/Description';
 import { Hero } from 'app/components/home/Hero';
 import { useEffect } from 'react';
