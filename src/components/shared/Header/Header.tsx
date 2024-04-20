@@ -1,26 +1,29 @@
-import Link from "next/link"
-import styles from './Header.module.css'
-import { validateAccessToken } from "app/utils/auth/validateAccesToken"
-
+import { validateAccessToken } from 'app/utils/auth/validateAccessToken'
+import Link from 'next/link'
+import { ShoppingCart } from '../ShoppingCart'
+import styles from './Header.module.sass'
 
 export const Header = async () =>{
   const customer = await validateAccessToken()
   return (
-    <header>
+    <header className={styles.Header}>
       <nav>
-        <ul>
-        <Link href="/" className="link">
-          <li>Home</li>
-          </Link>
-          <Link href="/store" className="link">
-            <li>Store</li>
+        <ul className={styles.Header__list}>
+          <li>
+            <Link href="/">
+              Home
             </Link>
-            <Link href="/test" className="link">
-            <li>Test</li>
+          </li>
+          <li>
+            <Link href="/store">
+              Store
             </Link>
+          </li>
         </ul>
-        {customer?.firsName ? (<p>Hola!{customer.firsName}</p>) : (<Link href="/login"></Link>)}
-          </nav>
-        </header>
-    )
+      </nav>
+      <div className={styles.Header__user}>
+        {customer?.firstName ? (<p>Hola! {customer.firstName}</p>) : (<Link href="/login">Login</Link>)}
+        <ShoppingCart />
+      </div>
+    </header>)
 }
